@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "407379155180",
+    "project_id": "zia-project-68a74",
+    "storage_bucket": "zia-project-68a74.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:407379155180:android:d74e6a406a4ae9a9556dc9",
+        "android_client_info": {
+          "package_name": "com.example.firebase_practice"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC37JzmLGEfNrMHHWL3KM_MK5tFj4W7TA8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
