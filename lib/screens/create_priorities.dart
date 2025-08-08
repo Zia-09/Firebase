@@ -22,7 +22,10 @@ class _CreatePrioritiesState extends State<CreatePriorities> {
           children: [
             TextField(
               controller: nameController,
-              decoration: InputDecoration(border: OutlineInputBorder()),
+              decoration: InputDecoration(
+                border: OutlineInputBorder(),
+                hintText: "Enter Name",
+              ),
             ),
             SizedBox(height: 30),
             isloading
@@ -56,12 +59,20 @@ class _CreatePrioritiesState extends State<CreatePriorities> {
                                       "Task has been created successfully",
                                     ),
                                     actions: [
-                                      TextButton(
-                                        onPressed: () {
-                                          Navigator.pop(context);
-                                          Navigator.pop(context);
-                                        },
-                                        child: Text("Ok"),
+                                      Center(
+                                        child: MaterialButton(
+                                          onPressed: () {
+                                            Navigator.pop(context);
+                                            Navigator.pop(context);
+                                          },
+                                          child: Text(
+                                            "Ok",
+                                            style: TextStyle(
+                                              color: Colors.white,
+                                            ),
+                                          ),
+                                          color: Colors.blue,
+                                        ),
                                       ),
                                     ],
                                   );

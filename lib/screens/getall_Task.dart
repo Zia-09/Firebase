@@ -2,6 +2,7 @@ import 'package:firebase_practice/model/taskModel.dart';
 // import 'package:firebase_practice/practice/secondcomplete_Task.dart';
 import 'package:firebase_practice/screens/complete_Task.dart';
 import 'package:firebase_practice/screens/createTask.dart';
+import 'package:firebase_practice/screens/getAll_priorities.dart';
 import 'package:firebase_practice/screens/inComplete_Task.dart';
 import 'package:firebase_practice/screens/update_Task.dart';
 import 'package:firebase_practice/serves/serves_Task.dart';
@@ -9,8 +10,8 @@ import 'package:firebase_practice/serves/serves_Task.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class HomeScreen extends StatelessWidget {
-  const HomeScreen({super.key});
+class GetallTask extends StatelessWidget {
+  const GetallTask({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +26,18 @@ class HomeScreen extends StatelessWidget {
         child: Icon(Icons.add),
       ),
       appBar: AppBar(
+        title: Text("Get All Task"),
+        // centerTitle: true,
         actions: [
+          IconButton(
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => GetallPriorities()),
+              );
+            },
+            icon: Icon(Icons.category_outlined),
+          ),
           IconButton(
             onPressed: () {
               Navigator.push(
