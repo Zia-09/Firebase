@@ -1,4 +1,6 @@
+import 'package:firebase_practice/model/priorityModel.dart';
 import 'package:firebase_practice/model/taskModel.dart';
+import 'package:firebase_practice/serves/servece_priority.dart';
 import 'package:firebase_practice/serves/serves_Task.dart';
 import 'package:flutter/material.dart';
 
@@ -15,6 +17,18 @@ class _CreatetaskdemoState extends State<Createtaskdemo> {
   TextEditingController descriptionController = TextEditingController();
 
   bool isloading = false;
+
+  List<PriorityModel> priorityList = [];
+  PriorityModel? _selectedPriority;
+  @override
+  void initState() {
+    // TODO: implement initState
+    ServecePriority().GetAllPriorities().first.then((value) {
+      priorityList = value;
+      setState(() {});
+    });
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -38,6 +52,22 @@ class _CreatetaskdemoState extends State<Createtaskdemo> {
                 border: OutlineInputBorder(),
                 hintText: "description",
               ),
+            ),
+            SizedBox(height: 20),
+            DropdownButton(
+              items: priorityList.map((e) {
+                return DropdownMenuItem(
+                  value: e,
+                  child: Text(e.name.toString()),
+                );
+              }).toList(),
+              isExpanded: true,
+              value: _selectedPriority,
+              hint: Text("select priority"),
+              onChanged: (value) {
+                _selectedPriority = value;
+                setState(() {});
+              },
             ),
             SizedBox(height: 30),
             isloading
@@ -66,6 +96,7 @@ class _CreatetaskdemoState extends State<Createtaskdemo> {
                                 description: descriptionController.text,
                                 createAt: DateTime.now().millisecond,
                                 iscomplete: false,
+                                priorityID: _selectedPriority!.docId.toString(),
                               ),
                             )
                             .then((value) {

@@ -26,11 +26,21 @@ class ServesTask {
         .delete();
   }
 
-  Future getTaskisComplete(Model model) async {
+  // Future getTaskisComplete(Model model) async {
+  //   return await FirebaseFirestore.instance
+  //       .collection("Mycollection")
+  //       .doc(model.docid)
+  //       .update({"iscomplete": true});
+  // }
+
+  Future markTaskAsComplete({
+    required String taskID,
+    required bool isCompleted,
+  }) async {
     return await FirebaseFirestore.instance
-        .collection("Mycollection")
-        .doc(model.docid)
-        .update({"iscomplete": true});
+        .collection('taskCollection')
+        .doc(taskID)
+        .update({'iscomplete': isCompleted});
   }
 
   // Get completed tasks
@@ -65,6 +75,18 @@ class ServesTask {
   Stream<List<Model>> GetAllTask() {
     return FirebaseFirestore.instance
         .collection("Mycollection")
+        .snapshots()
+        .map(
+          (taskList) => taskList.docs
+              .map((taskJson) => Model.fromJson(taskJson.data()))
+              .toList(),
+        );
+  }
+
+  Stream<List<Model>> getPriorityTask(String priorityID) {
+    return FirebaseFirestore.instance
+        .collection('Mycollection')
+        .where('priorityID', isEqualTo: priorityID)
         .snapshots()
         .map(
           (taskList) => taskList.docs

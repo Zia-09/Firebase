@@ -1,12 +1,13 @@
 import 'package:firebase_practice/model/taskModel.dart';
-// import 'package:firebase_practice/practice/secondcomplete_Task.dart';
+
 import 'package:firebase_practice/screens/complete_Task.dart';
 import 'package:firebase_practice/screens/createTask.dart';
 import 'package:firebase_practice/screens/getAll_priorities.dart';
 import 'package:firebase_practice/screens/inComplete_Task.dart';
+// import 'package:firebase_practice/screens/priority_taskview.dart';
 import 'package:firebase_practice/screens/update_Task.dart';
 import 'package:firebase_practice/serves/serves_Task.dart';
-// import 'package:firebase_practice/serves/task.dart';
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -77,7 +78,10 @@ class GetallTask extends StatelessWidget {
                       value: taskList[i].iscomplete,
                       onChanged: (value) {
                         try {
-                          ServesTask().getTaskisComplete(taskList[i]);
+                          ServesTask().markTaskAsComplete(
+                            taskID: taskList[i].docid.toString(),
+                            isCompleted: value!,
+                          );
                         } catch (e) {
                           ScaffoldMessenger.of(
                             context,
@@ -107,7 +111,9 @@ class GetallTask extends StatelessWidget {
                               SnackBar(
                                 content: Text(
                                   "Task has been deleted successfully",
+                                  style: TextStyle(color: Colors.white),
                                 ),
+                                backgroundColor: Colors.red,
                               ),
                             );
                           });
@@ -119,6 +125,15 @@ class GetallTask extends StatelessWidget {
                       },
                       icon: Icon(Icons.delete, color: Colors.red),
                     ),
+                    // IconButton(
+                    //   onPressed: () async {
+                    //     Navigator.push(
+                    //       context,
+                    //       MaterialPageRoute(builder: (context) => PriorityTaskView(model: priorit[i].toString(),)),
+                    //     );
+                    //   },
+                    //   icon: Icon(Icons.arrow_forward, color: Colors.blue),
+                    // ),
                   ],
                 ),
               );

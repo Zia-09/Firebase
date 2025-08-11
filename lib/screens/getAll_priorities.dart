@@ -1,5 +1,7 @@
 import 'package:firebase_practice/model/priorityModel.dart';
 import 'package:firebase_practice/screens/create_priorities.dart';
+// import 'package:firebase_practice/screens/getall_Task.dart';
+import 'package:firebase_practice/screens/priority_taskview.dart';
 import 'package:firebase_practice/screens/update_priorities.dart';
 import 'package:firebase_practice/serves/servece_priority.dart';
 import 'package:flutter/material.dart';
@@ -81,6 +83,19 @@ class GetallPriorities extends StatelessWidget {
                               }
                             },
                             icon: Icon(Icons.delete, color: Colors.red),
+                          ),
+                          IconButton(
+                            onPressed: () async {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => PriorityTaskView(
+                                    model: taskPriority[index],
+                                  ),
+                                ),
+                              );
+                            },
+                            icon: Icon(Icons.arrow_forward, color: Colors.blue),
                           ),
                         ],
                       ),
