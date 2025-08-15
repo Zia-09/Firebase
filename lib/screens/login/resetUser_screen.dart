@@ -84,7 +84,13 @@ class _ResetuserScreenState extends State<ResetuserScreen> {
                                           minWidth: 270,
                                           color: Colors.red,
                                           onPressed: () {
-                                            Navigator.pop(context);
+                                            Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                builder: (context) =>
+                                                    SigninScreen(),
+                                              ),
+                                            );
                                           },
                                           child: Text(
                                             "Okay",

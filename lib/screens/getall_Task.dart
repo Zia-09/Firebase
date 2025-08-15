@@ -1,9 +1,11 @@
 import 'package:firebase_practice/model/taskModel.dart';
+import 'package:firebase_practice/providers/userProviders.dart';
 
 import 'package:firebase_practice/screens/complete_Task.dart';
 import 'package:firebase_practice/screens/createTask.dart';
 import 'package:firebase_practice/screens/getAll_priorities.dart';
 import 'package:firebase_practice/screens/inComplete_Task.dart';
+import 'package:firebase_practice/screens/login/login.dart';
 // import 'package:firebase_practice/screens/priority_taskview.dart';
 import 'package:firebase_practice/screens/update_Task.dart';
 import 'package:firebase_practice/serves/serves_Task.dart';
@@ -12,10 +14,12 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class GetallTask extends StatelessWidget {
-  const GetallTask({super.key});
+  GetallTask({super.key});
 
   @override
   Widget build(BuildContext context) {
+    var userprovider = Provider.of<Userproviders>(context, listen: true);
+
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         onPressed: () {
@@ -26,8 +30,72 @@ class GetallTask extends StatelessWidget {
         },
         child: Icon(Icons.add),
       ),
+      drawer: Drawer(
+        child: ListView(
+          padding: EdgeInsets.zero,
+          children: [
+            DrawerHeader(
+              decoration: BoxDecoration(color: Colors.blue),
+              child: Column(
+                children: [
+                  CircleAvatar(
+                    maxRadius: 40,
+                    // child: Icon(Icons.person, size: 50),
+                    backgroundImage: AssetImage("images/cartoon.jpg"),
+                  ),
+                  SizedBox(height: 5),
+                  Text(
+                    '${userprovider.getUser().name.toString().toUpperCase() ?? "userName"}',
+                    style: TextStyle(color: Colors.white, fontSize: 20),
+                  ),
+                  Text(
+                    "${userprovider.getUser().email.toString() ?? "user@gmail.com"}",
+                    style: TextStyle(fontSize: 14),
+                  ),
+                ],
+              ),
+            ),
+            ListTile(
+              leading: const Icon(Icons.home),
+              title: const Text('Home'),
+              onTap: () {
+                Navigator.pop(context); // Close drawer
+              },
+            ),
+            ListTile(
+              leading: const Icon(Icons.settings),
+              title: const Text('Settings'),
+              onTap: () {
+                Navigator.pop(context);
+              },
+            ),
+            ListTile(
+              leading: const Icon(Icons.settings),
+              title: const Text('Notification'),
+              onTap: () {
+                Navigator.pop(context);
+              },
+            ),
+
+            Divider(),
+            ListTile(title: Text("Privecy Police")),
+            ListTile(title: Text("About us")),
+            ListTile(
+              trailing: const Icon(Icons.logout, color: Colors.red),
+              title: const Text('Logout'),
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => SigninScreen()),
+                );
+              },
+            ),
+          ],
+        ),
+      ),
       appBar: AppBar(
         title: Text("Get All Task"),
+
         // centerTitle: true,
         actions: [
           IconButton(
